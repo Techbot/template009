@@ -1,30 +1,20 @@
-$(function(){
-    
-    $("#startButton").click(function() {
-      
-        $("#startButton").remove();
-        $("#mygame").append("<div id='sprite1'>");
-        $("#sprite1").css("backgroundImage","url(spritesheet1.png)");
-        $("#sprite1").css("width","84");
-        $("#sprite1").css("height","84");
-        
-    });
-   
-    gameFramework={};
-    
-      gf={};  
-      
-      
-    gf.animation = function(options){
-     var defaultValues= {
-     url:false,
-     width:64,
-     numberOfFrames:1,
-     currentFrame:0,
-     rate:30
-     };
-     $.extend(this,defaultValues,options);
-     }
+    gf={};  
+  
+    gf.animation = function(options)
+    {
+        var defaultValues = {
+        url:false,
+        width : 64,
+        numberOfFrames:1,
+        currentFrame :0,
+        rate:30
+        };
+        $.extend(this,defaultValues,options);
+        if (this.url)
+        {
+            gf.addImage(this.url);
+        }
+    }
     
     var firstAnim = new gameFramework.animation({
     url: "spritesheet1.png",
@@ -32,13 +22,10 @@ $(function(){
     rate:60
     });
     
-    
-    
-    
-    divID = "sprite1";
-    
-    gf.setFrame = function(divId,animation){
-    $("#" + divID).css("backgroundPosition", " " + animation.currentFrame * animation.width + "px 0px");
+  
+    gf.setFrame = function(divId,animation)
+    {
+        $("#" + divID).css("backgroundPosition", " " + animation.currentFrame * animation.width + "px 0px");
     }
     
    gf.animationHandles={};
@@ -84,8 +71,79 @@ $(function(){
     }
         
    
+    gf.x = function(divId,position)
+    {
+        if (position) 
+        {
+            $("#"+divId).css("left",position));
+        }else
+        {
+            return parseInt($#"+divID).css("left"));
+        
+        }
+    }
+    
+    gf.y = function(divId,position)
+    {
+        if (position) 
+        {
+            $("#"+divId).css("top",position));
+        }else
+        {
+            return parseInt($("#" + divID).css("top"));
+        
+        }
+    }
+    
+    gf.imagesToPreload = [];
+    
+    
+    
+    gf.addImage = function (url)
+    {
+        if ($.inArray(url,gf.imagesToPreload) < 0)
+        {
+        gf.imagesToPreload.push();
+        }
+    }
+    gf.startPreloading = function(endCallback, progressCallback)
+    {
+        var images = [];
+        var total = gf.imagesToPreload.length;
+        
+        for (var i = 0;i < total; i++)
+        {
+            var image = new Image();
+            images.push(image);
+            image.src = gf.imagesToPreload[i];
+        }
+        
+        var preloadingPoller = setInterval(function()
+        {
+            var counter     = 0;
+            var total       = gf.imagesToPreload.length;
+            for (vari=0;i<total;i++)
+            {
+                if (images[i].complete)
+                {
+                    counter++;
+                }
+            }
+            if counter==total)
+            {
+                clearInterval(preloadingPoller);
+                endCallaback();
+            }else{
+               if (progressCallback)
+                {
+                    count++;
+                    progressCallback(()count / total) *100;
+                }
+            }
+        },100);
+    };
+    
 
     
-    
-    
-});
+            
+

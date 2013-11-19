@@ -6,6 +6,7 @@
        	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="../jquery.js"></script>
 		<script type="text/javascript" src="gameFramework.js"></script>
+		<script type="text/javascript" src="script.js"></script>
 		<!--script type="text/javascript" src="coder.js"></script-->
 		<style>
 		     html, body {
