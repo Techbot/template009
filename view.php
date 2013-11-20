@@ -17,20 +17,14 @@
     </head>
     <body>
 
-        <div id="container">
+        <div id="main">
             <h3 id="title">Battle</h3>
 
-           <div id="mygame" width="568" height="300" style="overflow: hidden">
+           <div id="mygame" width="568" height="600" style="overflow: hidden">
                 <img id="startButton" src="splash.png" />
             </div>
 
-            <div id ="float_left">
-            -x-
-            </div>
-
-            <div id ="float_right">
-            -x-
-            </div>
+            
 
         </div><!-- end container -->
 

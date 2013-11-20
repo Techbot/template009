@@ -1,35 +1,12 @@
     gf={};  
   
-    gf.animation = function(options)
-    {
-        var defaultValues = {
-        url:false,
-        width : 64,
-        numberOfFrames:1,
-        currentFrame :0,
-        rate:30
-        };
-        $.extend(this,defaultValues,options);
-        if (this.url)
-        {
-            gf.addImage(this.url);
-        }
-    }
     
-    var firstAnim = new gameFramework.animation({
-    url: "spritesheet1.png",
-    numberofFrames:4,
-    rate:60
-    });
-    
-  
     gf.setFrame = function(divId,animation)
     {
         $("#" + divID).css("backgroundPosition", " " + animation.currentFrame * animation.width + "px 0px");
     }
     
    gf.animationHandles={};
-   
    
    gf.setAnimation = function(divId,animation,loop)
    {
@@ -39,7 +16,7 @@
        }
        if (animation.url)
        {
-       $("#"+divId).css(backgroundImage","url('"+animation.url+"')");
+       $("#"+divId).css("backgroundImage","url('" + animation.url + "')");
        }
        if(animation.numberOfFrame>1)
        {
@@ -51,15 +28,14 @@
                    clearInterval(gf.animationHandles[divId]);
                    gf.animationHandles[divId]=false;
                }else{
-                        animation.currentFrame % = animation.numberofFrame;
+                        animation.currentFrame %= animation.numberofFrame;
                         gf.setFrame(divId,animation);
                     }
-           },animation.rate;
+           },animation.rate);
        }
    }
-  
-   
-    gf.addSprite = function(parentId,divId,optiuons)
+
+    gf.addSprite = function(parentId,divId,options)
     {
         var options = $.extend({
             x: 0,
@@ -67,18 +43,17 @@
             width:64,
             height:64
         },options);
-        $("#" + parentId.append("divid-'" + divId + "' style='position:absolute; left:" + options.y + "px;width:"options.width+"px ;height: " + options.height + "px'></div?");
+        $("#" + parentId).append("<div id='" + divId + "' style='position:absolute; left:" + options.x + "px; top: " +options.y + "px; width: " +options.width + "px ; height: " + options.height + "px'></div>");
     }
-        
    
     gf.x = function(divId,position)
     {
         if (position) 
         {
-            $("#"+divId).css("left",position));
+            $("#" + divId).css("left",position);
         }else
         {
-            return parseInt($#"+divID).css("left"));
+            return parseInt($("#" + divId).css("left"));
         
         }
     }
@@ -87,25 +62,24 @@
     {
         if (position) 
         {
-            $("#"+divId).css("top",position));
+            $("#" + divId).css("top",position);
         }else
         {
-            return parseInt($("#" + divID).css("top"));
+            return parseInt($("#" + divId).css("top"));
         
         }
     }
     
     gf.imagesToPreload = [];
     
-    
-    
-    gf.addImage = function (url)
+    gf.addImage = function(url)
     {
         if ($.inArray(url,gf.imagesToPreload) < 0)
         {
         gf.imagesToPreload.push();
         }
     }
+    
     gf.startPreloading = function(endCallback, progressCallback)
     {
         var images = [];
@@ -129,21 +103,36 @@
                     counter++;
                 }
             }
-            if counter==total)
+            if (counter==total)
             {
                 clearInterval(preloadingPoller);
-                endCallaback();
+                endCallback();
             }else{
                if (progressCallback)
                 {
                     count++;
-                    progressCallback(()count / total) *100;
+                    progressCallback((count / total) *100);
                 }
             }
         },100);
     };
     
-
+    gf.animation = function(options)
+    {
+        var defaultValues = {
+        url:false,
+        width : 64,
+        numberOfFrames:1,
+        currentFrame :0,
+        rate:30
+        };
+        $.extend(this,defaultValues,options);
+        if (this.url)
+        {
+            gf.addImage(this.url);
+        }
+    }
     
-            
-
+    
+    
+    
