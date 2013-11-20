@@ -1,6 +1,6 @@
 $(function() {
     var backgroundAnim = new gf.animation({
-        url : "back.png"
+        url : "back.jpg"
     });
     var frontAnim = new gf.animation({
         url: "front.png"
@@ -12,11 +12,11 @@ $(function() {
         url : "bug.png"
     });
     var playerAnim = new gf.animation({
-        url : "player.png"
+        url : "SoldierRun.png"
     });
 
     var initialize = function() {
-        $("#mygame").append("<div id='container' style='display: none; width: 640px; height: 480px;'>");
+        $("#mygame").append("<div id='container' style='display: none; width: 598px; height: 480px;margins:0 auto'>");
         gf.addSprite("container","background",{width: 640, height: 480});
         gf.addSprite("container","packets1",{width: 640, height: 40, y: 400});
         gf.addSprite("container","packets2",{width: 640, height: 40, y: 330});
@@ -25,7 +25,7 @@ $(function() {
         gf.addSprite("container","bugs2",{width: 640, height: 60, y: 100});
         gf.addSprite("container","bugs3",{width: 640, height: 60, y: 30});
         gf.addSprite("container","front",{width: 640, height: 480});
-        gf.addSprite("container","player",{width: 40, height: 40, y: 440, x: 260});
+        gf.addSprite("container","player",{width:120, height: 160, y: 340, x: 260});
 
         gf.setAnimation("background", backgroundAnim);
         gf.setAnimation("player", playerAnim);
